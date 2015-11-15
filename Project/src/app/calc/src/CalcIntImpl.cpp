@@ -14,26 +14,52 @@ CCalcIntImpl::~CCalcIntImpl()
 {
 }
 
-int CCalcIntImpl::offset(const char *inNumber, const char *inOffset, char *outRes, int outResSize)
+INT16 CCalcIntImpl::offsetLeft(const CHAR8 *inNumber, const CHAR8 *inOffset, CHAR8 *outRes, INT16 outResSize)
 {
 	if (NULL == inNumber || NULL == inOffset)
 	{
 		return echoInValidParams();
 	}
 
-	int number = atoi(inNumber);
-	int offset = atoi(inOffset);
-	int result = 0;
-	if (0 < offset)
+	INT16 number = atoi(inNumber);
+	INT16 offset = atoi(inOffset);
+	INT16 result = offset > 0 ? (number << offset) : (number >> -offset);
+	if (NULL != outRes && 0 < outResSize)
 	{
-		result = number << offset;
-	} else if (0 > offset)
-	{
-		result = number >> (-offset);
-	} else 
-	{
-		result = number;
+		snprintf(outRes, outResSize, "%d", result);
 	}
+	printf("%d\n", result);
+	return 0;
+}
+
+INT16 CCalcIntImpl::offsetRight(const CHAR8 *inNumber, const CHAR8 *inOffset, CHAR8 *outRes, INT16 outResSize)
+{
+	if (NULL == inNumber || NULL == inOffset)
+	{
+		return echoInValidParams();
+	}
+
+	INT16 number = atoi(inNumber);
+	INT16 offset = atoi(inOffset);
+	INT16 result = offset > 0 ? (number >> offset) : (number << -offset);;
+	if (NULL != outRes && 0 < outResSize)
+	{
+		snprintf(outRes, outResSize, "%d", result);
+	}
+	printf("%d\n", result);
+	return 0;
+}
+
+INT16 CCalcIntImpl::add(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize)
+{
+	if (NULL == inNumLeft || NULL == inNumRight)
+	{
+		return echoInValidParams();
+	}
+
+	INT16 numLeft = atoi(inNumLeft);
+	INT16 numRight = atoi(inNumRight);
+	INT16 result = numLeft + numRight;
 
 	if (NULL != outRes && 0 < outResSize)
 	{
@@ -43,16 +69,16 @@ int CCalcIntImpl::offset(const char *inNumber, const char *inOffset, char *outRe
 	return 0;
 }
 
-int CCalcIntImpl::add(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize)
+INT16 CCalcIntImpl::minus(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize)
 {
 	if (NULL == inNumLeft || NULL == inNumRight)
 	{
 		return echoInValidParams();
 	}
 
-	int numLeft = atoi(inNumLeft);
-	int numRight = atoi(inNumRight);
-	int result = numLeft + numRight;
+	INT16 numLeft = atoi(inNumLeft);
+	INT16 numRight = atoi(inNumRight);
+	INT16 result = numLeft - numRight;
 
 	if (NULL != outRes && 0 < outResSize)
 	{
@@ -62,35 +88,16 @@ int CCalcIntImpl::add(const char *inNumLeft, const char *inNumRight, char *outRe
 	return 0;
 }
 
-int CCalcIntImpl::minus(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize)
+INT16 CCalcIntImpl::multiply(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize)
 {
 	if (NULL == inNumLeft || NULL == inNumRight)
 	{
 		return echoInValidParams();
 	}
 
-	int numLeft = atoi(inNumLeft);
-	int numRight = atoi(inNumRight);
-	int result = numLeft - numRight;
-
-	if (NULL != outRes && 0 < outResSize)
-	{
-		snprintf(outRes, outResSize, "%d", result);
-	}
-	printf("%d\n", result);
-	return 0;
-}
-
-int CCalcIntImpl::multiply(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize)
-{
-	if (NULL == inNumLeft || NULL == inNumRight)
-	{
-		return echoInValidParams();
-	}
-
-	int numLeft = atoi(inNumLeft);
-	int numRight = atoi(inNumRight);
-	int result = numLeft * numRight;
+	INT16 numLeft = atoi(inNumLeft);
+	INT16 numRight = atoi(inNumRight);
+	INT16 result = numLeft * numRight;
 
 	if (NULL != outRes && 0 < outResSize)
 	{
@@ -101,21 +108,21 @@ int CCalcIntImpl::multiply(const char *inNumLeft, const char *inNumRight, char *
 }
 
 
-int CCalcIntImpl::divide(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize)
+INT16 CCalcIntImpl::divide(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize)
 {
 	if (NULL == inNumLeft || NULL == inNumRight)
 	{
 		return echoInValidParams();
 	}
 
-	int numLeft = atoi(inNumLeft);
-	int numRight = atoi(inNumRight);
+	INT16 numLeft = atoi(inNumLeft);
+	INT16 numRight = atoi(inNumRight);
 	if (0 == numRight)
 	{
 		return echoNaN();
 	}
 	
-	int result = numLeft / numRight;
+	INT16 result = numLeft / numRight;
 	if (NULL != outRes && 0 < outResSize)
 	{
 		snprintf(outRes, outResSize, "%d", result);
@@ -124,21 +131,57 @@ int CCalcIntImpl::divide(const char *inNumLeft, const char *inNumRight, char *ou
 	return 0;
 }
 
-int CCalcIntImpl::mod(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize)
+INT16 CCalcIntImpl::mod(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize)
 {
 	if (NULL == inNumLeft || NULL == inNumRight)
 	{
 		return echoInValidParams();
 	}
 
-	int numLeft = atoi(inNumLeft);
-	int numRight = atoi(inNumRight);
+	INT16 numLeft = atoi(inNumLeft);
+	INT16 numRight = atoi(inNumRight);
 	if (0 == numRight)
 	{
 		return echoNaN();
 	}
 	
-	int result = numLeft % numRight;
+	INT16 result = numLeft % numRight;
+	if (NULL != outRes && 0 < outResSize)
+	{
+		snprintf(outRes, outResSize, "%d", result);
+	}
+	printf("%d\n", result);
+	return 0;
+}
+
+INT16 CCalcIntImpl::bitAnd(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize)
+{
+	if (NULL == inNumLeft || NULL == inNumRight)
+	{
+		return echoInValidParams();
+	}
+
+	INT16 numLeft = atoi(inNumLeft);
+	INT16 numRight = atoi(inNumRight);
+	INT16 result = numLeft & numRight;
+	if (NULL != outRes && 0 < outResSize)
+	{
+		snprintf(outRes, outResSize, "%d", result);
+	}
+	printf("%d\n", result);
+	return 0;
+}
+
+INT16 CCalcIntImpl::bitOr(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize)
+{
+	if (NULL == inNumLeft || NULL == inNumRight)
+	{
+		return echoInValidParams();
+	}
+
+	INT16 numLeft = atoi(inNumLeft);
+	INT16 numRight = atoi(inNumRight);	
+	INT16 result = numLeft | numRight;
 	if (NULL != outRes && 0 < outResSize)
 	{
 		snprintf(outRes, outResSize, "%d", result);

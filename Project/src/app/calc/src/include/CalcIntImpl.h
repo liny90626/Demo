@@ -9,12 +9,15 @@ public:
 	CCalcIntImpl();
 	virtual ~CCalcIntImpl();
 
-	virtual int offset(const char *inNumber, const char *inOffset, char *outRes, int outResSize);
-	virtual int add(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize);
-	virtual int minus(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize);
-	virtual int multiply(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize);
-	virtual int divide(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize);
-	virtual int mod(const char *inNumLeft, const char *inNumRight, char *outRes, int outResSize);
+	virtual INT16 offsetLeft(const CHAR8 *inNumber, const CHAR8 *inOffset, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 offsetRight(const CHAR8 *inNumber, const CHAR8 *inOffset, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 add(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 minus(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 multiply(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 divide(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 mod(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 bitAnd(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize);
+	virtual INT16 bitOr(const CHAR8 *inNumLeft, const CHAR8 *inNumRight, CHAR8 *outRes, INT16 outResSize);
 };
 
 #endif

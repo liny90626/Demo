@@ -2,6 +2,7 @@
 
 export PJ_BUILD_DIR := $(PJ_DIR)/build
 export PJ_BUILD_CONFIG_DIR := $(PJ_BUILD_DIR)/config
+export PJ_BUILD_SCRIPTS_DIR := $(PJ_BUILD_DIR)/scripts
 export PJ_SRC_DIR := $(PJ_DIR)/src
 export PJ_INC_DIR := $(PJ_DIR)/include
 export PJ_LIB_DIR := $(PJ_DIR)/lib

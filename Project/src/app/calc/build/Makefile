@@ -1,7 +1,7 @@
 # coroutine demo
 
 # 模块名称定义
-MOD_BIN_NAME = calc
+MOD_BIN_NAME := calc
 
 PWD := $(shell pwd)
 export MOD_DIR := $(PWD)/../
@@ -11,6 +11,10 @@ PJ_BUILD_CONFIG_DIR ?=
 
 include $(PJ_BUILD_CONFIG_DIR)/TOOL.mak
 include $(PJ_BUILD_CONFIG_DIR)/MOD.mak
+
+# 版本定义
+export MAJOR_REVISION := 1
+export MINOR_REVISION := 0
 
 # 编译工具定义
 export CXX := $(MY_CXX)
@@ -23,7 +27,6 @@ export GFLAGS := $(MY_GFLAGS)
 export OFLAGS := $(MY_OFLAGS)
 
 export CPPFLAGS := $(MY_INCFLAGS)
-export CPPFLAGS += $(MY_COMPILE_FLAGS)
 export CPPFLAGS += $(MY_OFLAGS) $(MY_COMPILE_FLAGS)
  
 export LIBFLAGS := $(MY_LIBFLAGS) 
@@ -40,6 +43,13 @@ ifeq ($(PJ_BUILD_CONFIG_DIR),)
 	@exit 1
 endif
 
+ifeq ($(PJ_BUILD_SCRIPTS_DIR),)
+	@echo "Build failed: PJ_BUILD_SCRIPTS_DIR is NULL"
+	@exit 1
+endif
+
+	@$(PJ_BUILD_SCRIPTS_DIR)/genRevisionGit.sh $(MOD_BIN_NAME) "__APP_SRC_CALC_REVISION_H__"
+
 main:
 	@echo "\n"
 	@echo "Generate bin ..."
@@ -51,10 +61,9 @@ main:
 	cp -rf $(MOD_BIN_DIR)/$(MOD_BIN_NAME) $(PJ_BIN_DIR)/$(MOD_BIN_NAME)
 
 $(MOD_SRC_DIRS):
-	@echo "\n"
 	@$(MAKE) --directory=$@
 
-clean: check
+clean: check revision_clean
 	for d in $(MOD_SRC_DIRS); \
 	do \
 		cd $${d}; \

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "revision.h"
 #include "CalcIntImpl.h"
 #include "CalcFloatImpl.h"
 #include "CalcHexImpl.h"
@@ -20,8 +21,14 @@ enum operate_e
 	OPERATE_OR,
 };
 
+static int showRevision() {
+	printf("ModName: %s, Version: %s\n", MOD_NAME, MOD_VERSION);
+	return 0;
+}
+
 static int echoHelp()
 {
+	showRevision();
 	printf("usage: calc num1 operator num2 [-f/-n/-x]\n");
 	printf("-f: calculate in float\n");
 	printf("-n(default): calculate in integer\n");

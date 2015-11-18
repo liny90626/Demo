@@ -31,9 +31,7 @@ if [ -z "$1" ]; then
 	echo "No model name"
 	exit 1
 fi
-提交20151118 16:50 --- by LinKy
-1. 增加编译时自动生成revision的脚步  
-2. calc支持自动生成revision以及打印版本号功能
+
 if [ -z "$2" ]; then
 	echo "No header macro defined"
 	exit 1

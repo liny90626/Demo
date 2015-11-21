@@ -63,7 +63,7 @@ main:
 $(MOD_SRC_DIRS):
 	@$(MAKE) --directory=$@
 
-clean: check revision_clean
+clean: check
 	for d in $(MOD_SRC_DIRS); \
 	do \
 		cd $${d}; \

@@ -56,7 +56,7 @@ echo "#define MOD_VERSION 	\
 \"$MAJOR_REVISION.$MINOR_REVISION.${commitDateMonth}${commitDateDay}${commitDateHour}${commitDateMin}\"" >> $MOD_SRC_INC_DIR/revision.h
 echo "" >> $MOD_SRC_INC_DIR/revision.h
 echo "#if 0 // these are the 10 commit logs recently" >> $MOD_SRC_INC_DIR/revision.h
-git log -n 10 >> $MOD_SRC_INC_DIR/revision.h
+git log -n 10 $MOD_DIR >> $MOD_SRC_INC_DIR/revision.h
 echo "#endif" >> $MOD_SRC_INC_DIR/revision.h
 echo "" >> $MOD_SRC_INC_DIR/revision.h
 echo "#endif" >> $MOD_SRC_INC_DIR/revision.h

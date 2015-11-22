@@ -73,6 +73,5 @@ clean: check
 
 	-rm $(PJ_LIB_DIR)/$(MOD_LIB_NAME)
 	-rm $(INC_PATH_LIBCO)/*
-	-rm $(MOD_OBJ_DIR)/*
 	-rm $(MOD_LIB_DIR)/*
 	-rm $(MOD_INC_DIR)/*

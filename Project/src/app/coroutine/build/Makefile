@@ -47,7 +47,9 @@ main:
 	@echo "Generate bin ..."
 	mkdir -p $(MOD_BIN_DIR)
 	$(CXX) -o $(MOD_BIN_DIR)/$(MOD_BIN_NAME) $(MOD_OBJ_DIR)/*.o  $(LIBFLAGS)
+ifneq ($(GFLAG), -g)
 	$(STRIP) $(MOD_BIN_DIR)/$(MOD_BIN_NAME)
+endif
 	
 	@echo "Deploy bin ..."
 	cp -rf $(MOD_BIN_DIR)/$(MOD_BIN_NAME) $(PJ_BIN_DIR)/$(MOD_BIN_NAME)
@@ -66,4 +68,3 @@ clean: check
 
 	-rm $(PJ_BIN_DIR)/$(MOD_BIN_NAME)
 	-rm $(MOD_BIN_DIR)/*
-	-rm $(MOD_OBJ_DIR)/*

@@ -13,4 +13,4 @@ $(MOD_OBJ_DIR)/%.o : %.cpp
 	$(CXX) $(CPPFLAGS) $(GFLAG) $(OFLAG) -o $@  -c $<
 
 clean: check
-	-rm $(MOD_OBJ_DIR)*
+	-rm -rf $(MOD_OBJ_DIR)/*

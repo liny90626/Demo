@@ -21,6 +21,8 @@ typedef short int INT16;
 typedef unsigned short int UINT16;
 typedef int INT32;
 typedef unsigned int UINT32;
+typedef long int INT64;
+typedef unsigned long int UINT64;
 
 
 #endif

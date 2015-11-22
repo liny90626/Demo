@@ -22,11 +22,6 @@ if [ -z "$MINOR_REVISION" ]; then
 	exit 1
 fi
 
-if [ -z "$CPPFLAGS" ]; then
-	echo "Bad parameters, CPPFLAGS"
-	exit 1
-fi
-
 if [ -z "$1" ]; then
 	echo "No model name"
 	exit 1

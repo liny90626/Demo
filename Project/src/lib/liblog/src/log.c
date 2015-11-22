@@ -12,8 +12,8 @@
 /* 跨平台头文件 */
 #if ( defined __linux__ ) || ( defined __unix ) || ( defined _AIX )
 // Linux
-#include<unistd.h>
-#include <pthread.h>
+#include <unistd.h>
+#include <sys/syscall.h>
 #elif ( defined _WIN32 )
 // Windows
 #include <windows.h>
@@ -29,7 +29,7 @@
 #define SNPRINTF    snprintf
 #define PRINTF      printf
 #define PROCESSID   (UINT64)getpid()
-#define THREADID    (UINT64)pthread_self()
+#define THREADID    (UINT64)syscall(SYS_gettid)
 #define NEWLINE     "\n"
 #elif ( defined _WIN32 )
 // Windows

@@ -45,9 +45,9 @@ calc_clean:
 #######################################################################
 #lib modules build 
 #######################################################################
-lib: log libco
+lib: liblog libco
 
-lib_clean: libco_clean log_clean
+lib_clean: libco_clean liblog_clean
 
 liblog: 
 	@$(MAKE) --directory=$(BUILD_LIB_LOG_DIR)
